@@ -1,0 +1,61 @@
+= pkMediaCMSSlotsPlugin =
+
+== Requirements ==
+
+* pkMediaPlugin, of course
+* pkContextCMSPlugin, of course
+* All of their requirements.
+
+== Installation ==
+
+Enable the pkContextCMSSlideshow and pkContextCMSVideo modules and add
+those slot types to the allowed slots in your pkContextCMS project:
+
+    all:
+      pkContextCMS:
+        slot_types:
+          pkContextCMSSlideshow: Slideshow
+          pkContextCMSVideo: Video
+          ... other custom slot types here
+
+== Usage ==
+
+Include a slideshow slot or add one to a multiple-slot area in your
+pkContextCMS site in the usual way. Then click "Choose Media" in
+the slot to browse the media plugin. Select photos by clicking on them. The
+selected photos appear at the top of the page and can be dragged and
+dropped into any desired order. When you return to the page, the
+photos will appear as a slideshow in which the user clicks to advance
+to the next image. (Yes, we plan to add a more obvious user interface
+for slideshows.)
+
+Video slots work the same way, except that you select only one
+video per slot.
+
+You can control the width and height at which images are displayed
+by passing the `width` and `height` parameters when you
+include the slot.
+
+For a single slot:
+
+    <?php pk_context_cms_slot('sidebar',
+      'pkContextCMSSlideshow',
+      array('width' => 240, 'flexHeight' => true)) ?>
+
+For an area (with options for other allowed slot types in the area as well):
+
+    <?php pk_context_cms_area('sidebar',
+      array(
+        'allowed_types' => array('pkContextCMSRichText', 
+          'pkContextCMSText', 
+          'pkContextCMSSlideshow', 
+          'pkContextCMSVideo'),
+        'type_options' => array(
+          'pkContextCMSSlideshow' => array('width' => 240, 'flexHeight' => true),
+          'pkContextCMSVideo' => array('width' => 240, 'flexHeight' => true),
+          'pkContextCMSText' => array('multiline' => true),
+          'pkContextCMSRichText' => array('tool' => 'Sidebar')))) ?>
+
+Note the use of the `flexHeight` option to specify that the height of a
+slideshow or video should scale to maintain its aspect ratio relative to
+the specified width.

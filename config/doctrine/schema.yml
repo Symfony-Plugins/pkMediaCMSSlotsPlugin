@@ -1,0 +1,16 @@
+options:
+  type: INNODB
+
+pkContextCMSSlideshowSlot:
+  inheritance:
+    extends: pkContextCMSSlot
+    type: column_aggregation
+    keyField: type
+    keyValue: 'pkContextCMSSlideshow'
+
+pkContextCMSVideoSlot:
+  inheritance:
+    extends: pkContextCMSSlot
+    type: column_aggregation
+    keyField: type
+    keyValue: 'pkContextCMSVideo'
