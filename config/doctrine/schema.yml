@@ -1,6 +1,13 @@
 options:
   type: INNODB
 
+pkContextCMSImageSlot:
+  inheritance:
+    extends: pkContextCMSSlot
+    type: column_aggregation
+    keyField: type
+    keyValue: 'pkContextCMSImage'
+
 pkContextCMSSlideshowSlot:
   inheritance:
     extends: pkContextCMSSlot
