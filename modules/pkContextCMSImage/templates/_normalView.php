@@ -5,6 +5,7 @@
   <?php // points to our slot's edit action. Setting the ajax parameter ?>
   <?php // to false causes the edit action to redirect to the newly ?>
   <?php // updated page. ?>
+  <?php // Wrap controls in a div for styling purposes ?>
   <?php echo link_to('Choose image<span></span>',
     sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
       http_build_query(
@@ -20,6 +21,7 @@
               "permid" => $permid,
               "noajax" => 1)), true)),
     array('class' => 'pk-btn pk-context-media-choose')) ?>
+  <br class="c" />
 <?php endif ?>
 <?php if ($item): ?>
   <div class="pk-context-media-image">
