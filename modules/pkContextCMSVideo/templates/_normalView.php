@@ -16,6 +16,7 @@
             array(
               "slot" => $name, 
               "slug" => $slug, 
+              "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
               "permid" => $permid,
               "noajax" => 1)), true)),
     array('class' => 'pk-btn pk-context-media-choose')) ?>

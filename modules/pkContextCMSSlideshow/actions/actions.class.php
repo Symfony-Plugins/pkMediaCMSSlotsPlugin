@@ -10,7 +10,7 @@ class pkContextCMSSlideshowActions extends pkContextCMSBaseActions
     if ($items === false)
     {
       // Cancellation or error
-      return $this->redirect($this->page->getUrl());
+      return $this->redirectToPage();
     } 
     $this->slot->value = serialize($items);
     $this->editSave();
