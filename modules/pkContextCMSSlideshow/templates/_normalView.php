@@ -22,10 +22,14 @@
     array('class' => 'pk-btn pk-context-media-choose')) ?>
 <br class="c"/>
 <?php endif ?>
+
+<?php if (count($items) > 1): ?>
 <div class="pk-context-media-show-controls">
 	<?php echo link_to_function('Previous', '', array('class' => 'pk-context-media-show-controls-previous pk-btn arrow-left icon', )) ?>
 	<?php echo link_to_function('Next', '', array('class' => 'pk-context-media-show-controls-next pk-btn arrow-right icon	', )) ?>	
 </div>
+<?php endif ?>
+
 <ul class="pk-context-media-show">
 <?php $first = true; $n=0; foreach ($items as $item): ?>
   <?php $embed = str_replace(
