@@ -21,9 +21,12 @@
     array('class' => 'pk-btn pk-context-media-choose')) ?>
 <br class="c"/>
 <?php endif ?>
+<div class="pk-context-media-show-controls">
+	<?php echo link_to_function('Previous', '', array('class' => 'pk-context-media-show-controls-previous pk-btn arrow-left icon', )) ?>
+	<?php echo link_to_function('Next', '', array('class' => 'pk-context-media-show-controls-next pk-btn arrow-right icon	', )) ?>	
+</div>
 <ul class="pk-context-media-show">
-<?php $first = true ?>
-<?php $n=0; foreach ($items as $item): ?>
+<?php $first = true; $n=0; foreach ($items as $item): ?>
   <?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
     array($width, 
@@ -32,19 +35,46 @@
       $item->format),
     $item->embed) ?>
   <li class="pk-context-media-show-item shadow" id="pk-context-media-show-item-<?php echo $n ?>" style="height:<?php echo $height ?>"><?php echo $embed ?></li>
-  <?php $first = false ?>
-<?php $n++; endforeach ?>
+<?php $first = false; $n++; endforeach ?>
 </ul>
-<script>
+
+<script type='text/javascript'>
 $(function() {
-  $('.pk-context-media-show li').click(function() {
-    $(this).hide();
-    var next = $(this).next();
-    if (!next.length)
-    {
-      next = $($(this).parent()).children(":first");
-    }
-    next.fadeIn();
+	
+	var position = 0;
+	var img_count = <?php echo count($items) ?>-1;
+		
+  $('.pk-context-media-show li.pk-context-media-show-item').click(function() {
+		if (position <= img_count)
+		{
+			position++;
+			if (position == img_count+1 ) { position = 0; }
+			$('.pk-context-media-show-item').hide();
+			$('#pk-context-media-show-item-'+position).fadeIn('slow');			
+		}
   });
+
+	$('.pk-context-media-show-controls-previous').click(function(event){
+		event.preventDefault();
+		if (position >= 0)
+		{
+			position--;
+			if (position < 0 ) { position = img_count; }
+			$('.pk-context-media-show-item').hide();
+			$('#pk-context-media-show-item-'+position).fadeIn('slow');			
+		}
+	});
+
+	$('.pk-context-media-show-controls-next').click(function(event){
+		event.preventDefault();
+		if (position <= img_count)
+		{
+			position++;
+			if (position == img_count+1 ) { position = 0; }
+			$('.pk-context-media-show-item').hide();
+			$('#pk-context-media-show-item-'+position).fadeIn('slow');			
+		}
+	});
+
 });
 </script>
