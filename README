@@ -8,8 +8,13 @@
 
 == Installation ==
 
-Enable the pkContextCMSSlideshow and pkContextCMSVideo modules and add
-those slot types to the allowed slots in your pkContextCMS project:
+Enable the pkContextCMSSlideshow and pkContextCMSVideo modules, add
+those slot types to the allowed slots in your pkContextCMS project,
+and set the API key to be used when talking to pkMediaPlugin. 
+Optionally you can also specify the site on which pkMediaPlugin
+is running; if not, the current site will be used. Note that this
+means that several instances of the CMS can share a single media
+repository:
 
     all:
       pkContextCMS:
@@ -17,6 +22,32 @@ those slot types to the allowed slots in your pkContextCMS project:
           pkContextCMSSlideshow: Slideshow
           pkContextCMSVideo: Video
           ... other custom slot types here
+        # Optional
+        media_site: http://www.mymediasite.com
+        # Required
+        media_apikey: "yourapikey"
+
+On the site where pkMediaPlugin is installed (which can be the
+same site), you'll need to list the same API key:
+
+    all:
+      pkMedia:
+        apikeys:
+          - "yourapikey"
+
+=== When pkMediaPlugin Is On A Separate Site ===
+
+You don't necessarily have to run pkMediaPlugin and pkContextCMSPlugin
+on the same site. A remote media repository will work just as well
+as a local one. 
+
+By default the pkMedia API will attempt to talk to pkMediaPlugin running
+on the same site. You an change that like this in `app.yml`:
+
+all:
+  pkContextCMS:
+    media_site: http://www.mymediasite.com
+
 
 == Usage ==
 
@@ -59,3 +90,4 @@ For an area (with options for other allowed slot types in the area as well):
 Note the use of the `flexHeight` option to specify that the height of a
 slideshow or video should scale to maintain its aspect ratio relative to
 the specified width.
+

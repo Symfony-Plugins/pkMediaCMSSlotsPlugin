@@ -11,13 +11,13 @@
         array(
         "pkMediaId" => $itemId,
         "type" => "video",
-        "after" => url_for("pkContextCMSVideo/edit?" . 
+        "after" => url_for("pkContextCMSVideo/edit") . "?" .
           http_build_query(
             array(
               "slot" => $name, 
               "slug" => $slug, 
               "permid" => $permid,
-              "noajax" => 1)), true))),
+              "noajax" => 1)), true)),
     array('class' => 'pk-btn pk-context-media-choose')) ?>
 <?php endif ?>
 <?php if ($item): ?>

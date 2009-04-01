@@ -11,13 +11,13 @@
         array("multiple" => true,
         "pkMediaIds" => implode(",", $itemIds),
         "type" => "image",
-        "after" => url_for("pkContextCMSSlideshow/edit?" . 
+        "after" => url_for("pkContextCMSSlideshow/edit") . "?" . 
           http_build_query(
             array(
               "slot" => $name, 
               "slug" => $slug, 
               "permid" => $permid,
-              "noajax" => 1)), true))),
+              "noajax" => 1)), true)),
     array('class' => 'pk-btn pk-context-media-choose')) ?>
 <br class="c"/>
 <?php endif ?>
