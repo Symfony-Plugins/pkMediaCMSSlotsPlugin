@@ -5,7 +5,7 @@
   <?php // points to our slot's edit action. Setting the ajax parameter ?>
   <?php // to false causes the edit action to redirect to the newly ?>
   <?php // updated page. ?>
-  <?php echo link_to('Choose photos<span></span>',
+  <?php echo link_to('Choose images<span></span>',
     sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
       http_build_query(
         array("multiple" => true,
