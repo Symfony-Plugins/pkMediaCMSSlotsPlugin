@@ -43,6 +43,7 @@
 <?php $first = false; $n++; endforeach ?>
 </ul>
 
+<?php if (count($items) > 1): ?>
 <script type='text/javascript'>
 $(function() {
 	
@@ -50,12 +51,15 @@ $(function() {
 	var img_count = <?php echo count($items) ?>-1;
 		
   $('.pk-context-media-show li.pk-context-media-show-item').click(function() {
+		
+		$(this).attr('title','Click For Next Image &rarr;');
+		
 		if (position <= img_count)
 		{
 			position++;
 			if (position == img_count+1 ) { position = 0; }
 			$('.pk-context-media-show-item').hide();
-			$('#pk-context-media-show-item-'+position).fadeIn('slow');			
+			$('#pk-context-media-show-item-'+position).fadeIn('slow');	
 		}
   });
 
@@ -83,3 +87,4 @@ $(function() {
 
 });
 </script>
+<?php endif ?>
