@@ -26,7 +26,7 @@
   <?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
     array($width, 
-      $flexHeight ? (($width / $item->width) * $item->height) : $height, 
+      $flexHeight ? floor(($width / $item->width) * $item->height) : $height, 
       $resizeType,
       $item->format),
     $item->embed) ?>
