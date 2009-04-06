@@ -11,6 +11,7 @@ class pkContextCMSVideoComponents extends pkContextCMSBaseComponents
   public function executeNormalView()
   {
     $this->setup();
+    $this->constraints = $this->getOption('constraints', array());
     $this->width = $this->getOption('width', 320);
     $this->height = $this->getOption('height', 240);
     $this->resizeType = $this->getOption('resizeType', 's');

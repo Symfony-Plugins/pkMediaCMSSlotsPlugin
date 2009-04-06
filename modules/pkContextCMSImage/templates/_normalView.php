@@ -9,17 +9,19 @@
   <?php echo link_to('Choose image<span></span>',
     sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
       http_build_query(
-        array(
-        "pkMediaId" => $itemId,
-        "type" => "image",
-        "after" => url_for("pkContextCMSImage/edit") . "?" .
-          http_build_query(
-            array(
-              "slot" => $name, 
-              "slug" => $slug, 
-              "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
-              "permid" => $permid,
-              "noajax" => 1)), true)),
+        array_merge(
+          $constraints,
+          array(
+          "pkMediaId" => $itemId,
+          "type" => "image",
+          "after" => url_for("pkContextCMSImage/edit") . "?" .
+            http_build_query(
+              array(
+                "slot" => $name, 
+                "slug" => $slug, 
+                "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
+                "permid" => $permid,
+                "noajax" => 1)), true))),
     array('class' => 'pk-btn pk-context-media-choose')) ?>
   <br class="c" />
 <?php endif ?>

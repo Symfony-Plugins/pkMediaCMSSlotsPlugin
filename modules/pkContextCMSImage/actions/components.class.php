@@ -11,6 +11,7 @@ class pkContextCMSImageComponents extends pkContextCMSBaseComponents
   public function executeNormalView()
   {
     $this->setup();
+    $this->constraints = $this->getOption('constraints', array());
     $this->width = $this->getOption('width', 440);
     $this->height = $this->getOption('height', 330);
     $this->resizeType = $this->getOption('resizeType', 's');
