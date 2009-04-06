@@ -24,13 +24,13 @@
 <?php endif ?>
 
 <?php if (count($items) > 1): ?>
-<div class="pk-context-media-show-controls">
+<div id="pk-context-media-show-<?php echo $id ?>-controls" class="pk-context-media-show-controls">
 	<?php echo link_to_function('Previous', '', array('class' => 'pk-context-media-show-controls-previous pk-btn arrow-left icon', )) ?>
 	<?php echo link_to_function('Next', '', array('class' => 'pk-context-media-show-controls-next pk-btn arrow-right icon	', )) ?>	
 </div>
 <?php endif ?>
 
-<ul class="pk-context-media-show">
+<ul id="pk-context-media-show-<?php echo $id ?>" class="pk-context-media-show">
 <?php $first = true; $n=0; foreach ($items as $item): ?>
   <?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
@@ -39,7 +39,7 @@
       $resizeType,
       $item->format),
     $item->embed) ?>
-  <li class="pk-context-media-show-item shadow" id="pk-context-media-show-item-<?php echo $n ?>" style="height:<?php echo $height ?>"><?php echo $embed ?></li>
+  <li class="pk-context-media-show-item shadow" id="pk-context-media-show-item-<?php echo $id ?>-<?php echo $n ?>" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
 <?php $first = false; $n++; endforeach ?>
 </ul>
 
@@ -50,7 +50,7 @@ $(function() {
 	var position = 0;
 	var img_count = <?php echo count($items) ?>-1;
 		
-  $('.pk-context-media-show li.pk-context-media-show-item').click(function() {
+  $('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').click(function() {
 		
 		$(this).attr('title','Click For Next Image &rarr;');
 		
@@ -58,30 +58,30 @@ $(function() {
 		{
 			position++;
 			if (position == img_count+1 ) { position = 0; }
-			$('.pk-context-media-show-item').hide();
-			$('#pk-context-media-show-item-'+position).fadeIn('slow');	
+			$('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').hide();
+			$('#pk-context-media-show-item-<?php echo $id ?>-'+position).fadeIn('slow');	
 		}
   });
 
-	$('.pk-context-media-show-controls-previous').click(function(event){
+	$('#pk-context-media-show-<?php echo $id ?>-controls .pk-context-media-show-controls-previous').click(function(event){
 		event.preventDefault();
 		if (position >= 0)
 		{
 			position--;
 			if (position < 0 ) { position = img_count; }
-			$('.pk-context-media-show-item').hide();
-			$('#pk-context-media-show-item-'+position).fadeIn('slow');			
+			$('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').hide();
+			$('#pk-context-media-show-item-<?php echo $id ?>-'+position).fadeIn('slow');			
 		}
 	});
 
-	$('.pk-context-media-show-controls-next').click(function(event){
+	$('#pk-context-media-show-<?php echo $id ?>-controls .pk-context-media-show-controls-next').click(function(event){
 		event.preventDefault();
 		if (position <= img_count)
 		{
 			position++;
 			if (position == img_count+1 ) { position = 0; }
-			$('.pk-context-media-show-item').hide();
-			$('#pk-context-media-show-item-'+position).fadeIn('slow');			
+			$('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').hide();
+			$('#pk-context-media-show-item-<?php echo $id ?>-'+position).fadeIn('slow');			
 		}
 	});
 
