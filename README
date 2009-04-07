@@ -105,3 +105,38 @@ the specified width.
 Also note the use of the `link` option to specify that the image slot should
 be a link to the home page of the site. This allows image slots to be
 used as navigation links. 
+
+In addition to the parameters demonstrated above, you can also
+pass a `constraints` parameter which ensures that the media plugin
+will only allow the selection of images with certain characteristics:
+
+    // Allow only the selection of images with a 4x3 aspect ratio
+    // and a minimum width of 600 pixels
+    <?php pk_context_cms_slot('sidebar',
+      'pkContextCMSSlideshow',
+      array('width' => 240, 'flexHeight' => true,
+        'constraints' => array('minimum-width' => 60,
+          'aspect-width' => 4, 'aspect-height' => 3))) ?>
+
+`constraints` may contain the following values:
+
+* When you pass `width` and `height`, only images with those exact
+dimensions will be displayed.
+
+* When you pass `minimum-width` and-or `minimum-height`, only images
+with dimensions meeting those minimum criteria will be displayed.
+
+* When you pass `aspect-width` and `aspect_height`, only images
+with the specified aspect ratio will be displayed (example: passing
+aspect-width=4 and aspect-height=3 displays only images with
+a 4x3 aspect ratio). This is a powerful option because there is
+usually no real need to require a fixed size due to the automatic
+resizing capabilities of the plugin. Instead, specify the aspect
+ratio and, to ensure adequate quality, specify the minimum width and height.
+
+TODO: enforce these constraints again when the results come
+back from the media plugin. 
+In the meantime however the worst that can happen is that a determined 
+user manages to select an image that does not have the required dimensions 
+by manufacturing a bogus URL (we already ensure they have selected a 
+valid image).
