@@ -14,6 +14,7 @@
           array(
           "pkMediaId" => $itemId,
           "type" => "image",
+          "label" => "Select an Image",
           "after" => url_for("pkContextCMSImage/edit") . "?" .
             http_build_query(
               array(

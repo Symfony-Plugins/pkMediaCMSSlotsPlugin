@@ -8,11 +8,12 @@
   <?php echo link_to('Choose video<span></span>',
     sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
       http_build_query(
-        array(
+        array_merge(
           $constraints,
           array(
           "pkMediaId" => $itemId,
           "type" => "video",
+          "label" => "Select a Video",
           "after" => url_for("pkContextCMSVideo/edit") . "?" .
             http_build_query(
               array(

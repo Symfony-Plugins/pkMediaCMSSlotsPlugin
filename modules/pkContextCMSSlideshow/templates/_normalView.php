@@ -13,6 +13,7 @@
           array("multiple" => true,
           "pkMediaIds" => implode(",", $itemIds),
           "type" => "image",
+          "label" => "Create a Slideshow",
           "after" => url_for("pkContextCMSSlideshow/edit") . "?" . 
             http_build_query(
               array(
