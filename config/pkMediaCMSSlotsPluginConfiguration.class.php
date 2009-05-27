@@ -15,5 +15,6 @@ class pkMediaCMSSlotsPluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
+    pkContextCMSTools::addGlobalButton('Media', 'pkMedia/index', 'pk-media');
   }
 }
