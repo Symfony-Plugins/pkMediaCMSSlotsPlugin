@@ -5,24 +5,29 @@
   <?php // points to our slot's edit action. Setting the ajax parameter ?>
   <?php // to false causes the edit action to redirect to the newly ?>
   <?php // updated page. ?>
-  <?php echo link_to('Choose video<span></span>',
-    sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
-      http_build_query(
-        array_merge(
-          $constraints,
-          array(
-          "pkMediaId" => $itemId,
-          "type" => "video",
-          "label" => "Select a Video",
-          "after" => url_for("pkContextCMSVideo/edit") . "?" .
-            http_build_query(
-              array(
-                "slot" => $name, 
-                "slug" => $slug, 
-                "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
-                "permid" => $permid,
-                "noajax" => 1)), true))),
-    array('class' => 'pk-btn pk-context-media-choose')) ?>
+
+  <?php slot("pk-slot-controls-$name-$permid") ?>
+    <li class="pk-controls-item choose-video">
+    <?php echo link_to('Choose video<span></span>',
+      sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
+        http_build_query(
+          array_merge(
+            $constraints,
+            array(
+            "pkMediaId" => $itemId,
+            "type" => "video",
+            "label" => "Select a Video",
+            "after" => url_for("pkContextCMSVideo/edit") . "?" .
+              http_build_query(
+                array(
+                  "slot" => $name, 
+                  "slug" => $slug, 
+                  "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
+                  "permid" => $permid,
+                  "noajax" => 1)), true))),
+      array('class' => 'pk-btn icon pk-video')) ?>
+    </li>
+  <?php end_slot() ?>
 <?php endif ?>
 <?php if ($item): ?>
   <div class="pk-context-media-video">

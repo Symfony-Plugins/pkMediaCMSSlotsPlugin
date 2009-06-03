@@ -5,35 +5,44 @@
   <?php // points to our slot's edit action. Setting the ajax parameter ?>
   <?php // to false causes the edit action to redirect to the newly ?>
   <?php // updated page. ?>
-  <?php echo link_to('Choose images<span></span>',
-    sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
-      http_build_query(
-        array_merge(
-          $constraints,
-          array("multiple" => true,
-          "pkMediaIds" => implode(",", $itemIds),
-          "type" => "image",
-          "label" => "Create a Slideshow",
-          "after" => url_for("pkContextCMSSlideshow/edit") . "?" . 
-            http_build_query(
-              array(
-                "slot" => $name, 
-                "slug" => $slug, 
-                "permid" => $permid,
-                "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
-                "noajax" => 1)), true))),
-    array('class' => 'pk-btn pk-context-media-choose')) ?>
-<br class="c"/>
+
+  <?php slot("pk-slot-controls-$name-$permid") ?>
+    <li class="pk-controls-item choose-images">
+    <?php echo link_to('Choose images',
+      sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
+        http_build_query(
+          array_merge(
+            $constraints,
+            array("multiple" => true,
+            "pkMediaIds" => implode(",", $itemIds),
+            "type" => "image",
+            "label" => "Create a Slideshow",
+            "after" => url_for("pkContextCMSSlideshow/edit") . "?" . 
+              http_build_query(
+                array(
+                  "slot" => $name, 
+                  "slug" => $slug, 
+                  "permid" => $permid,
+                  "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
+                  "noajax" => 1)), true))),
+      array('class' => 'pk-btn icon pk-media')) ?>
+    </li>
+		<?php // Next/Prev Arrows Duplicated for Logged in View ?>
+		<?php /* if (count($items) > 1): ?>
+		<li><?php echo link_to_function('Previous', '', array('class' => 'pk-context-media-show-controls-previous pk-btn arrow-left icon', )) ?></li>
+		<li><?php echo link_to_function('Next', '', array('class' => 'pk-context-media-show-controls-next pk-btn arrow-right icon	', )) ?></li>
+		<?php endif */ ?>
+  <?php end_slot() ?>
 <?php endif ?>
 
 <?php if (count($items) > 1): ?>
-<div id="pk-context-media-show-<?php echo $id ?>-controls" class="pk-context-media-show-controls">
-	<?php echo link_to_function('Previous', '', array('class' => 'pk-context-media-show-controls-previous pk-btn arrow-left icon', )) ?>
-	<?php echo link_to_function('Next', '', array('class' => 'pk-context-media-show-controls-next pk-btn arrow-right icon	', )) ?>	
-</div>
+<ul id="pk-slideshow-controls-<?php echo $id ?>" class="pk-slideshow-controls">
+	<li><?php echo link_to_function('Previous', '', array('class' => 'pk-slideshow-controls-previous pk-btn pk-arrow-left icon', )) ?></li>
+	<li><?php echo link_to_function('Next', '', array('class' => 'pk-slideshow-controls-next pk-btn pk-arrow-right icon	', )) ?></li>
+</ul>
 <?php endif ?>
 
-<ul id="pk-context-media-show-<?php echo $id ?>" class="pk-context-media-show">
+<ul id="pk-slideshow-<?php echo $id ?>" class="pk-slideshow">
 <?php $first = true; $n=0; foreach ($items as $item): ?>
   <?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
@@ -42,7 +51,7 @@
       $resizeType,
       $item->format),
     $item->embed) ?>
-  <li class="pk-context-media-show-item shadow" id="pk-context-media-show-item-<?php echo $id ?>-<?php echo $n ?>" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
+  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
 <?php $first = false; $n++; endforeach ?>
 </ul>
 
@@ -52,8 +61,10 @@ $(function() {
 	
 	var position = 0;
 	var img_count = <?php echo count($items) ?>-1;
+	
+	$('#pk-slideshow-item-<?php echo $id ?>-'+position).show();
 		
-  $('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').click(function() {
+  $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').click(function() {
 		
 		$(this).attr('title','Click For Next Image &rarr;');
 		
@@ -61,30 +72,30 @@ $(function() {
 		{
 			position++;
 			if (position == img_count+1 ) { position = 0; }
-			$('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').hide();
-			$('#pk-context-media-show-item-<?php echo $id ?>-'+position).fadeIn('slow');	
+			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
+			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');	
 		}
   });
 
-	$('#pk-context-media-show-<?php echo $id ?>-controls .pk-context-media-show-controls-previous').click(function(event){
+	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-previous').click(function(event){
 		event.preventDefault();
 		if (position >= 0)
 		{
 			position--;
 			if (position < 0 ) { position = img_count; }
-			$('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').hide();
-			$('#pk-context-media-show-item-<?php echo $id ?>-'+position).fadeIn('slow');			
+			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
+			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
 		}
 	});
 
-	$('#pk-context-media-show-<?php echo $id ?>-controls .pk-context-media-show-controls-next').click(function(event){
+	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-next').click(function(event){
 		event.preventDefault();
 		if (position <= img_count)
 		{
 			position++;
 			if (position == img_count+1 ) { position = 0; }
-			$('#pk-context-media-show-<?php echo $id ?> .pk-context-media-show-item').hide();
-			$('#pk-context-media-show-item-<?php echo $id ?>-'+position).fadeIn('slow');			
+			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
+			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
 		}
 	});
 
