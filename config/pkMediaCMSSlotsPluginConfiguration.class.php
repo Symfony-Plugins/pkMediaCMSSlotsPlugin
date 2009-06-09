@@ -15,5 +15,9 @@ class pkMediaCMSSlotsPluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
+    // Register an event so we can add our buttons to the set of global CMS back end admin buttons
+    // that appear when the apostrophe is clicked. 
+    $this->dispatcher->connect('pkContextCMS.getGlobalButtons', array('pkMediaCMSSlotsTools', 
+      'getGlobalButtons'));
   }
 }
