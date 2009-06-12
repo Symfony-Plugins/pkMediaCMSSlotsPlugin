@@ -46,4 +46,10 @@
   <?php endif ?>
   <?php echo $embed ?>
   </div>
+<?php else: ?>
+  <?php if ($defaultImage): ?>
+    <div class="pk-context-media-image">
+      <?php echo image_tag($defaultImage) ?>
+    </div>
+  <?php endif ?>
 <?php endif ?>

@@ -92,7 +92,8 @@ For an area (with options for other allowed slot types in the area as well):
           'pkContextCMSSlideshow', 
           'pkContextCMSVideo'),
         'type_options' => array(
-          'pkContextCMSImage' => array('link' => url_for('@homepage')),
+          'pkContextCMSImage' => array('link' => url_for('@homepage'),
+            'defaultImage' => '/images/defaultImage.png'),
           'pkContextCMSSlideshow' => array('width' => 240, 'flexHeight' => true),
           'pkContextCMSVideo' => array('width' => 240, 'flexHeight' => true),
           'pkContextCMSText' => array('multiline' => true),
@@ -105,6 +106,15 @@ the specified width.
 Also note the use of the `link` option to specify that the image slot should
 be a link to the home page of the site. This allows image slots to be
 used as navigation links. 
+
+The `defaultImage` option, currently supported only by still image slots,
+displays an alternate image URL if no image has been selected. This is useful
+for still image slots because they are often used as site logos, which should
+be clickable to reach the home page. Note that since the default image is
+not accessed through the media plugin, it is not resized or cropped. You should
+select a default image of a size that is already reasonable for your purposes.
+In practice, you probably won't use this option except when preparing a
+default skeleton for a site intended to be edited by others.
 
 In addition to the parameters demonstrated above, you can also
 pass a `constraints` parameter which ensures that the media plugin
