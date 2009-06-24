@@ -57,13 +57,16 @@
       $resizeType,
       $item->format),
     $item->embed) ?>
-  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>">
-    <?php echo $embed ?></li>
-    <?php if ($title): ?>
-      <?php // These are pre-escaped HTML ?>
-      <p class="pk-slideshow-title"><?php echo $item->title ?></p>
-      <p class="pk-slideshow-description"><?php echo $item->description ?></p>
-    <?php endif ?>
+  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>">
+    <ul>
+      <li class="pk-slideshow-image" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
+      <?php if ($title): ?>
+        <li class="pk-slideshow-title"><?php echo $item->title ?></li>
+      <?php endif ?>
+      <?php if ($description): ?>
+        <li class="pk-slideshow-description"><?php echo $item->description ?></li>
+      <?php endif ?>
+    </ul>
   </li>
 <?php $first = false; $n++; endforeach ?>
 </ul>
@@ -74,7 +77,7 @@ $(function() {
 	
 	var position = 0;
 	var img_count = <?php echo count($items) ?>-1;
-	
+	var intervalEnabled = <?php echo !!$interval ?>;
 	$('#pk-slideshow-item-<?php echo $id ?>-'+position).show();
 		
   $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').click(function() {
@@ -92,11 +95,13 @@ $(function() {
 
 	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-previous').click(function(event){
 		event.preventDefault();
+		intervalEnabled = false;
 		previous();
 	});
 
 	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-next').click(function(event){
 		event.preventDefault();
+		intervalEnabled = false;
 		next();
 	});
 
@@ -130,9 +135,10 @@ $(function() {
     {
       clearTimeout(intervalTimeout);
     }
-  	<?php if ($interval > 0): ?>
+    if (intervalEnabled)
+    {
   	  intervalTimeout = setTimeout(next, <?php echo $interval ?> * 1000);
-    <?php endif ?>
+  	}
   }
   interval();
 });
