@@ -35,7 +35,7 @@
   <?php end_slot() ?>
 <?php endif ?>
 
-<?php if (count($items) > 1): ?>
+<?php if ($arrows && (count($items) > 1)): ?>
 <ul id="pk-slideshow-controls-<?php echo $id ?>" class="pk-slideshow-controls">
 	<li><?php echo link_to_function('Previous', '', array('class' => 'pk-slideshow-controls-previous pk-btn pk-arrow-left icon', )) ?></li>
 	<li><?php echo link_to_function('Next', '', array('class' => 'pk-slideshow-controls-next pk-btn pk-arrow-right icon	', )) ?></li>
@@ -57,7 +57,14 @@
       $resizeType,
       $item->format),
     $item->embed) ?>
-  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
+  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>">
+    <?php echo $embed ?></li>
+    <?php if ($title): ?>
+      <?php // These are pre-escaped HTML ?>
+      <p class="pk-slideshow-title"><?php echo $item->title ?></p>
+      <p class="pk-slideshow-description"><?php echo $item->description ?></p>
+    <?php endif ?>
+  </li>
 <?php $first = false; $n++; endforeach ?>
 </ul>
 
@@ -85,26 +92,49 @@ $(function() {
 
 	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-previous').click(function(event){
 		event.preventDefault();
-		if (position >= 0)
+		previous();
+	});
+
+	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-next').click(function(event){
+		event.preventDefault();
+		next();
+	});
+
+  function previous() 
+  {
+  	if (position >= 0)
 		{
 			position--;
 			if (position < 0 ) { position = img_count; }
 			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
 			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
 		}
-	});
-
-	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-next').click(function(event){
-		event.preventDefault();
-		if (position <= img_count)
-		{
-			position++;
-			if (position == img_count+1 ) { position = 0; }
-			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
-			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
-		}
-	});
-
+		interval();
+  }
+  
+  function next()
+  {
+  	if (position <= img_count)
+  	{
+  		position++;
+  		if (position == img_count+1 ) { position = 0; }
+  		$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
+  		$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
+  	}
+  	interval();
+  }
+  var intervalTimeout = null;
+  function interval()
+  {
+    if (intervalTimeout)
+    {
+      clearTimeout(intervalTimeout);
+    }
+  	<?php if ($interval > 0): ?>
+  	  intervalTimeout = setTimeout(next, <?php echo $interval ?> * 1000);
+    <?php endif ?>
+  }
+  interval();
 });
 </script>
 <?php endif ?>
