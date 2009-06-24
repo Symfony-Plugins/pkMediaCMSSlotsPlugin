@@ -44,10 +44,16 @@
 
 <ul id="pk-slideshow-<?php echo $id ?>" class="pk-slideshow">
 <?php $first = true; $n=0; foreach ($items as $item): ?>
+  <?php $iwidth = $width ?>
+  <?php $iheight = $flexHeight ? floor(($width / $item->width) * $item->height) : $height ?>
+  <?php if (($iwidth > $item->width) || ($iheight > $item->height)): ?>
+    <?php $iwidth = $item->width ?>
+    <?php $iheight = $item->height ?>
+  <?php endif ?>
   <?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-    array($width, 
-      $flexHeight ? floor(($width / $item->width) * $item->height) : $height, 
+    array($iwidth, 
+      $iheight, 
       $resizeType,
       $item->format),
     $item->embed) ?>
