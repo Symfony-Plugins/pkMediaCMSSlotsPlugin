@@ -77,8 +77,9 @@ $(function() {
 	
 	var position = 0;
 	var img_count = <?php echo count($items) ?>-1;
-	var intervalEnabled = <?php echo !!$interval ?>;
 	$('#pk-slideshow-item-<?php echo $id ?>-'+position).show();
+
+	var intervalEnabled = <?php echo ($interval)? 1:0; ?>;
 		
   $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').click(function() {
 		
@@ -112,7 +113,7 @@ $(function() {
 			position--;
 			if (position < 0 ) { position = img_count; }
 			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
-			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
+			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');		
 		}
 		interval();
   }
