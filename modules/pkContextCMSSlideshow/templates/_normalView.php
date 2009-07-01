@@ -27,18 +27,13 @@
                   "noajax" => 1)), true))),
       array('class' => 'pk-btn icon pk-media')) ?>
     </li>
-		<?php // Next/Prev Arrows Duplicated for Logged in View ?>
-		<?php /* if (count($items) > 1): ?>
-		<li><?php echo link_to_function('Previous', '', array('class' => 'pk-context-media-show-controls-previous pk-btn arrow-left icon', )) ?></li>
-		<li><?php echo link_to_function('Next', '', array('class' => 'pk-context-media-show-controls-next pk-btn arrow-right icon	', )) ?></li>
-		<?php endif */ ?>
   <?php end_slot() ?>
 <?php endif ?>
 
 <?php if ($arrows && (count($items) > 1)): ?>
 <ul id="pk-slideshow-controls-<?php echo $id ?>" class="pk-slideshow-controls">
-	<li><?php echo link_to_function('Previous', '', array('class' => 'pk-slideshow-controls-previous pk-btn pk-arrow-left icon', )) ?></li>
-	<li><?php echo link_to_function('Next', '', array('class' => 'pk-slideshow-controls-next pk-btn pk-arrow-right icon	', )) ?></li>
+	<li><?php echo link_to_function('Previous', '', array('class' => 'pk-slideshow-controls-previous pk-btn pk-arrow-left icon nobg', )) ?></li>
+	<li><?php echo link_to_function('Next', '', array('class' => 'pk-slideshow-controls-next pk-btn pk-arrow-right icon	nobg', )) ?></li>
 </ul>
 <?php endif ?>
 
