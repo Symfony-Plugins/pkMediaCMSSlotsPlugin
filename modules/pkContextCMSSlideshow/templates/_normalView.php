@@ -12,7 +12,7 @@
       sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
         http_build_query(
           array_merge(
-            $constraints,
+            $options['constraints'],
             array("multiple" => true,
             "pkMediaIds" => implode(",", $itemIds),
             "type" => "image",
@@ -30,113 +30,4 @@
   <?php end_slot() ?>
 <?php endif ?>
 
-<?php if ($arrows && (count($items) > 1)): ?>
-<ul id="pk-slideshow-controls-<?php echo $id ?>" class="pk-slideshow-controls">
-	<li><?php echo link_to_function('Previous', '', array('class' => 'pk-slideshow-controls-previous pk-btn pk-arrow-left icon nobg', )) ?></li>
-	<li><?php echo link_to_function('Next', '', array('class' => 'pk-slideshow-controls-next pk-btn pk-arrow-right icon	nobg', )) ?></li>
-</ul>
-<?php endif ?>
-
-<ul id="pk-slideshow-<?php echo $id ?>" class="pk-slideshow">
-<?php $first = true; $n=0; foreach ($items as $item): ?>
-  <?php $iwidth = $width ?>
-  <?php $iheight = $flexHeight ? floor(($width / $item->width) * $item->height) : $height ?>
-  <?php if (($iwidth > $item->width) || ($iheight > $item->height)): ?>
-    <?php $iwidth = $item->width ?>
-    <?php $iheight = $item->height ?>
-  <?php endif ?>
-  <?php $embed = str_replace(
-    array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-    array($iwidth, 
-      $iheight, 
-      $resizeType,
-      $item->format),
-    $item->embed) ?>
-  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>">
-    <ul>
-      <li class="pk-slideshow-image" style="height:<?php echo $height ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
-      <?php if ($title): ?>
-        <li class="pk-slideshow-title"><?php echo $item->title ?></li>
-      <?php endif ?>
-      <?php if ($description): ?>
-        <li class="pk-slideshow-description"><?php echo $item->description ?></li>
-      <?php endif ?>
-    </ul>
-  </li>
-<?php $first = false; $n++; endforeach ?>
-</ul>
-
-<?php if (count($items) > 1): ?>
-<script type='text/javascript'>
-$(function() {
-	
-	var position = 0;
-	var img_count = <?php echo count($items) ?>-1;
-	$('#pk-slideshow-item-<?php echo $id ?>-'+position).show();
-
-	var intervalEnabled = <?php echo ($interval)? 1:0; ?>;
-		
-  $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').click(function() {
-		
-		$(this).attr('title','Click For Next Image &rarr;');
-		
-		if (position <= img_count)
-		{
-			position++;
-			if (position == img_count+1 ) { position = 0; }
-			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
-			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');	
-		}
-  });
-
-	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-previous').click(function(event){
-		event.preventDefault();
-		intervalEnabled = false;
-		previous();
-	});
-
-	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-next').click(function(event){
-		event.preventDefault();
-		intervalEnabled = false;
-		next();
-	});
-
-  function previous() 
-  {
-  	if (position >= 0)
-		{
-			position--;
-			if (position < 0 ) { position = img_count; }
-			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
-			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');		
-		}
-		interval();
-  }
-  
-  function next()
-  {
-  	if (position <= img_count)
-  	{
-  		position++;
-  		if (position == img_count+1 ) { position = 0; }
-  		$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
-  		$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
-  	}
-  	interval();
-  }
-  var intervalTimeout = null;
-  function interval()
-  {
-    if (intervalTimeout)
-    {
-      clearTimeout(intervalTimeout);
-    }
-    if (intervalEnabled)
-    {
-  	  intervalTimeout = setTimeout(next, <?php echo $interval ?> * 1000);
-  	}
-  }
-  interval();
-});
-</script>
-<?php endif ?>
+<?php include_component('pkContextCMSSlideshow', 'slideshow', array('items' => $items, 'id' => $id, 'options' => $options)) ?>

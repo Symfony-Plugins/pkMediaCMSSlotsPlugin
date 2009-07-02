@@ -8,19 +8,13 @@ class pkContextCMSSlideshowComponents extends pkContextCMSBaseComponents
     // we have an external editor instead
     $this->setup();
   }
+
   public function executeNormalView()
   {
     $this->setup();
-    $this->constraints = $this->getOption('constraints', array());
-    $this->width = $this->getOption('width', 440);
-    $this->height = $this->getOption('height', 330);
-    $this->resizeType = $this->getOption('resizeType', 's');
-    $this->flexHeight = $this->getOption('flexHeight');
-    $this->title = $this->getOption('title');
-    $this->description = $this->getOption('description');
-    $this->interval = $this->getOption('interval', false) + 0;
-    $this->arrows = $this->getOption('arrows', ($this->interval <= 0));
-    $this->transition = $this->getOption('transition');
+
+		$this->options['constraints'] = $this->getOption('constraints', array());
+		
     // Behave well if it's not set yet!
     if (strlen($this->slot->value))
     {
@@ -37,4 +31,17 @@ class pkContextCMSSlideshowComponents extends pkContextCMSBaseComponents
       $this->itemIds = array();
     }
   }
+
+	public function executeSlideshow()
+	{
+    $this->options['width'] = $this->getOption('width', 440);
+    $this->options['height'] = $this->getOption('height', 330);
+    $this->options['resizeType'] = $this->getOption('resizeType', 's');
+    $this->options['flexHeight'] = $this->getOption('flexHeight');
+    $this->options['title'] = $this->getOption('title');
+    $this->options['description'] = $this->getOption('description');
+    $this->options['interval'] = $this->getOption('interval', false) + 0;
+    $this->options['arrows'] = $this->getOption('arrows', ($this->getOption('interval') <= 0));
+    $this->options['transition'] = $this->getOption('transition');
+	}
 }
