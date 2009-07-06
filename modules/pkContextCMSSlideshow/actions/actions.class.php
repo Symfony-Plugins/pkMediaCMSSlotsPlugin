@@ -6,7 +6,7 @@ class pkContextCMSSlideshowActions extends pkContextCMSBaseActions
   {
     $this->logMessage("====== in pkContextCMSSlideshowActions::executeEdit", "info");
     $this->editSetup();
-    $items = pkMediaAPI::getSelectedItems($request, "app_pkContextCMS_media", false, 'image');
+    $items = pkMediaAPI::getSelectedItems($request, false, "image");
     if ($items === false)
     {
       // Cancellation or error

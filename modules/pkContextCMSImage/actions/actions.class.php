@@ -6,7 +6,7 @@ class pkContextCMSImageActions extends pkContextCMSBaseActions
   {
     $this->logMessage("====== in pkContextCMSImageActions::executeEdit", "info");
     $this->editSetup();
-    $item = pkMediaAPI::getSelectedItem($request, "app_pkContextCMS_media", "image");
+    $item = pkMediaAPI::getSelectedItem($request, "image");
     if ($item === false)
     {
       // Cancellation or error

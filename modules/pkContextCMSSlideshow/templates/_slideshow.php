@@ -107,4 +107,9 @@ $(function() {
   interval();
 });
 </script>
+<?php elseif (count($items) == 1): ?>
+<script>
+  <?php // Make sure a single-image slideshow is not hidden entirely ?>
+        $('#pk-slideshow-item-<?php echo $id ?>-0').show();  
+</script>
 <?php endif ?>

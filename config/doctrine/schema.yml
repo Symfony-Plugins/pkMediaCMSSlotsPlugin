@@ -21,3 +21,10 @@ pkContextCMSVideoSlot:
     type: column_aggregation
     keyField: type
     keyValue: 'pkContextCMSVideo'
+
+pkContextCMSMediaBrowserSlot:
+  inheritance:
+    extends: pkContextCMSSlot
+    type: column_aggregation
+    keyField: type
+    keyValue: 'pkContextCMSMediaBrowser'

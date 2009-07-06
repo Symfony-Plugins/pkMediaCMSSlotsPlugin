@@ -31,3 +31,4 @@
 <?php endif ?>
 
 <?php include_component('pkContextCMSSlideshow', 'slideshow', array('items' => $items, 'id' => $id, 'options' => $options)) ?>
+

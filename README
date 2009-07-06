@@ -23,12 +23,13 @@ repository:
           pkContextCMSSlideshow: Slideshow
           pkContextCMSVideo: Video
           ... other custom slot types here
+      pkMedia:
+        # Required unless media site has apipublic set to true
+        client_apikey: "yourapikey"
         # Optional
-        media_site: http://www.mymediasite.com
-        # Required
-        media_apikey: "yourapikey"
+        # client_site: http://www.mymediasite.com
 
-On the site where pkMediaPlugin is installed (which can be the
+On the site where pkMediaPlugin is installed (which, by default, is the
 same site), you'll need to list the same API key:
 
     all:
@@ -46,9 +47,14 @@ By default the pkMedia API will attempt to talk to pkMediaPlugin running
 on the same site. You an change that like this in `app.yml`:
 
 all:
-  pkContextCMS:
-    media_site: http://www.mymediasite.com
+  pkMedia:
+    client_site: http://www.mymediasite.com
 
+When the media server is on the same site you will probably be surprised to see the front end controller disappear from the URL when you cross over to the media plugin to select things. You can fix that by setting the client_site to include the front end controller for dev:
+
+dev:
+  pkMedia:
+    client_site: http://mediasite/frontend_dev.php/
 
 == Usage ==
 

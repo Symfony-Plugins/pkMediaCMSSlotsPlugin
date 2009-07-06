@@ -6,7 +6,7 @@ class pkContextCMSVideoActions extends pkContextCMSBaseActions
   {
     $this->logMessage("====== in pkContextCMSVideoActions::executeEdit", "info");
     $this->editSetup();
-    $item = pkMediaAPI::getSelectedItem($request, "app_pkContextCMS_media", "video");
+    $item = pkMediaAPI::getSelectedItem($request, "video");
     if ($item === false)
     {
       // Cancellation or error
