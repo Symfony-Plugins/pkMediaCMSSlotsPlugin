@@ -45,9 +45,9 @@ $(function() {
 
 	var intervalEnabled = <?php echo ($options['interval'])? 1:0; ?>;
 	
+	$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').attr('title', 'Click For Next Image');
+  
   $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').click(function() {
-	  
-		$(this).attr('title','Click For Next Image &rarr;');
 	  intervalEnabled = false;
 	  next();
   });
