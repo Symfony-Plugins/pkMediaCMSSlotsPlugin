@@ -7,18 +7,19 @@
 
 <ul id="pk-slideshow-<?php echo $id ?>" class="pk-slideshow">
 <?php $first = true; $n=0; foreach ($items as $item): ?>
-  <?php $iwidth = $options['width'] ?>
-  <?php $iheight = $options['flexHeight'] ? floor(($options['width'] / $item->width) * $item->height) : $options['height'] ?>
-  <?php if (($iwidth > $item->width) || ($iheight > $item->height)): ?>
-    <?php $iwidth = $item->width ?>
-    <?php $iheight = $item->height ?>
-  <?php endif ?>
+  <?php $dimensions = pkDimensions::constrain(
+    $item->width, 
+    $item->height,
+    $item->format, 
+    array("width" => $options['width'],
+      "height" => $options['flexHeight'] ? false : $options['height'],
+      "resizeType" => $options['resizeType'])) ?>
   <?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-    array($iwidth, 
-      $iheight, 
-      $options['resizeType'],
-      $item->format),
+    array($dimensions['width'], 
+      $dimensions['height'], 
+      $dimensions['resizeType'],
+      $dimensions['format']),
     $item->embed) ?>
   <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>">
     <ul>
@@ -45,16 +46,10 @@ $(function() {
 	var intervalEnabled = <?php echo ($options['interval'])? 1:0; ?>;
 	
   $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').click(function() {
-	
+	  
 		$(this).attr('title','Click For Next Image &rarr;');
-	
-		if (position <= img_count)
-		{
-			position++;
-			if (position == img_count+1 ) { position = 0; }
-			$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide();
-			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');	
-		}
+	  intervalEnabled = false;
+	  next();
   });
 
 	$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-previous').click(function(event){

@@ -23,6 +23,13 @@ class pkContextCMSImageComponents extends pkContextCMSBaseComponents
     {
       $this->item = unserialize($this->slot->value);
       $this->itemId = $this->item->id;
+      $this->dimensions = pkDimensions::constrain(
+        $this->item->width, 
+        $this->item->height,
+        $this->item->format, 
+        array("width" => $this->width,
+          "height" => $this->flexHeight ? false : $this->height,
+          "resizeType" => $this->resizeType));
     }
     else
     {

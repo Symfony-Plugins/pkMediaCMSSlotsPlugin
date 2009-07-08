@@ -34,18 +34,12 @@
 <?php endif ?>
 <?php if ($item): ?>
   <div class="pk-context-media-image">
-  <?php $iwidth = $width ?>
-  <?php $iheight = $flexHeight ? floor(($width / $item->width) * $item->height) : $height ?>
-  <?php if (($iwidth > $item->width) || ($iheight > $item->height)): ?>
-    <?php $iwidth = $item->width ?>
-    <?php $iheight = $item->height ?>
-  <?php endif ?>
   <?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-    array($iwidth, 
-      $iheight,
-      $resizeType,
-      $item->format),
+    array($dimensions['width'], 
+      $dimensions['height'],
+      $dimensions['resizeType'],
+      $dimensions['format']),
     $item->embed) ?>
   <?php if ($link): ?>
     <?php $embed = "<a href=\"$link\">$embed</a>" ?>
