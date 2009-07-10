@@ -9,7 +9,7 @@
   <?php slot("pk-slot-controls-$name-$permid") ?>
     <li class="pk-controls-item choose-video">
     <?php echo link_to('Choose video<span></span>',
-      sfConfig::get('app_pkContextCMS_media_site', false) . "/media/select?" .
+      sfConfig::get('app_pkMedia_client_site', false) . "/media/select?" .
         http_build_query(
           array_merge(
             $constraints,
