@@ -7,7 +7,12 @@ class pkMediaCMSSlotsTools
   // pkMediaCMSSlotsPluginConfiguration class for the registration of the event listener.
   static public function getGlobalButtons()
   {
-    pkContextCMSTools::addGlobalButtons(array(
-      new pkContextCMSGlobalButton('Media', 'pkMedia/index', 'pk-media')));
+    // Only if we have suitable credentials
+    $user = sfContext::getInstance()->getUser();
+    if ($user->hasCredential('media_admin') || $user->hasCredential('media_upload'))
+    {
+      pkContextCMSTools::addGlobalButtons(array(
+        new pkContextCMSGlobalButton('Media', 'pkMedia/index', 'pk-media')));
+    }
   }
 }
