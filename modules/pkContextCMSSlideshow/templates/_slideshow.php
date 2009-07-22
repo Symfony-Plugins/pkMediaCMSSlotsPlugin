@@ -41,7 +41,9 @@ $(function() {
 
 	var position = 0;
 	var img_count = <?php echo count($items) ?>-1;
-	$('#pk-slideshow-item-<?php echo $id ?>-'+position).show();
+
+	$('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item').hide(); // Hide all slideshow items to start
+	$('#pk-slideshow-item-<?php echo $id ?>-'+position).show(); // Show the first slideshow item
 
 	var intervalEnabled = <?php echo ($options['interval'])? 1:0; ?>;
 	
@@ -103,8 +105,10 @@ $(function() {
 });
 </script>
 <?php elseif (count($items) == 1): ?>
-<script>
+<script type="text/javascript" charset="utf-8">
   <?php // Make sure a single-image slideshow is not hidden entirely ?>
-        $('#pk-slideshow-item-<?php echo $id ?>-0').show();  
+	$(document).ready(function() {
+    $('#pk-slideshow-item-<?php echo $id ?>-0').show();  
+	});
 </script>
 <?php endif ?>
