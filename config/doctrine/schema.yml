@@ -28,3 +28,10 @@ pkContextCMSMediaBrowserSlot:
     type: column_aggregation
     keyField: type
     keyValue: 'pkContextCMSMediaBrowser'
+
+pkContextCMSPDFSlot:
+  inheritance:
+    extends: pkContextCMSSlot
+    type: column_aggregation
+    keyField: type
+    keyValue: 'pkContextCMSPDF'
