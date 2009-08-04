@@ -27,11 +27,12 @@
                 "actual_slug" => pkContextCMSTools::getRealPage()->getSlug(),
                 "permid" => $permid,
                 "noajax" => 1)), true))),
-    array('class' => 'pk-btn icon pk-media')) ?>
+    array('class' => 'pk-btn icon pk-pdf')) ?>
 	</li>
 <?php end_slot() ?>
 
 <?php endif ?>
+
 <?php if ($item): ?>
   <div class="pk-context-media-pdf">
     <a href="<?php echo $item->original ?>">
@@ -47,6 +48,13 @@
       <?php echo $embed ?>
     </a>
   </div>
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$("#pk-slot-<?php echo $id ?> .pk-context-media-pdf a").prepend('<div class="pk-media-pdf-icon-overlay">Click to Download PDF</div>').attr('title','Click to Download PDF')
+		});
+	</script>
+
 <?php else: ?>
   <?php if ($defaultImage): ?>
     <div class="pk-context-media-pdf">
