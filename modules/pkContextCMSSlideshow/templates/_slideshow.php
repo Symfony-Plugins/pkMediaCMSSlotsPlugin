@@ -65,6 +65,11 @@ $(function() {
 		intervalEnabled = false;
 		next();
 	});
+	
+	// Catch the anchor click and unset the parent click!
+	$('.pk-slideshow-description a').mouseup(function(){ 
+		$(this).parents('.pk-slideshow-item').unbind('click');
+	});
 
   function previous() 
   {
