@@ -33,23 +33,33 @@
 
 <?php endif ?>
 <?php if ($item): ?>
-  <div class="pk-context-media-image">
-  <?php $embed = str_replace(
-    array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-    array($dimensions['width'], 
-      $dimensions['height'],
-      $dimensions['resizeType'],
-      $dimensions['format']),
-    $item->embed) ?>
-  <?php if ($link): ?>
-    <?php $embed = "<a href=\"$link\">$embed</a>" ?>
-  <?php endif ?>
-  <?php echo $embed ?>
-  </div>
+  <ul>
+    <li class="pk-context-image">
+    <?php $embed = str_replace(
+      array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
+      array($dimensions['width'], 
+        $dimensions['height'],
+        $dimensions['resizeType'],
+        $dimensions['format']),
+      $item->embed) ?>
+    <?php if ($link): ?>
+      <?php $embed = "<a href=\"$link\">$embed</a>" ?>
+    <?php endif ?>
+    <?php echo $embed ?>
+    </li>
+    <?php if ($title): ?>
+      <li class="pk-image-title"><?php echo $item->title ?></li>
+    <?php endif ?>
+    <?php if ($description): ?>
+      <li class="pk-image-description"><?php echo $item->description ?></li>
+    <?php endif ?>
+  </ul>
 <?php else: ?>
   <?php if ($defaultImage): ?>
-    <div class="pk-context-media-image">
-      <?php echo image_tag($defaultImage) ?>
-    </div>
+    <ul>
+      <li class="pk-context-image">
+        <?php echo image_tag($defaultImage) ?>
+      <li>
+    </ul>
   <?php endif ?>
 <?php endif ?>

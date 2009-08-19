@@ -18,6 +18,8 @@ class pkContextCMSImageComponents extends pkContextCMSBaseComponents
     $this->link = $this->getOption('link', false);
     $this->flexHeight = $this->getOption('flexHeight');
     $this->defaultImage = $this->getOption('defaultImage');
+    $this->title = $this->getOption('title');
+    $this->description = $this->getOption('description');
     // Behave well if it's not set yet!
     if (strlen($this->slot->value))
     {

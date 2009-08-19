@@ -34,31 +34,39 @@
 <?php endif ?>
 
 <?php if ($item): ?>
-  <div class="pk-context-media-pdf">
-    <a href="<?php echo $item->original ?>">
-      <?php // JOHN: make the PDF-ness visible here, perhaps as a semiopaque overlay ?>
-      <?php // of the Adobe PDF icon ?>
-      <?php $embed = str_replace(
-        array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-        array($dimensions['width'], 
-          $dimensions['height'],
-          $dimensions['resizeType'],
-          $dimensions['format']),
-        $item->embed) ?>
-      <?php echo $embed ?>
-    </a>
-  </div>
-
+  <ul>
+    <li class="pk-context-pdf">
+      <a href="<?php echo $item->original ?>">
+        <?php // JOHN: make the PDF-ness visible here, perhaps as a semiopaque overlay ?>
+        <?php // of the Adobe PDF icon ?>
+        <?php $embed = str_replace(
+          array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
+          array($dimensions['width'], 
+            $dimensions['height'],
+            $dimensions['resizeType'],
+            $dimensions['format']),
+          $item->embed) ?>
+        <?php echo $embed ?>
+      </a>
+    </li>
+    <?php if ($title): ?>
+      <li class="pk-pdf-title"><?php echo $item->title ?></li>
+    <?php endif ?>
+    <?php if ($description): ?>
+      <li class="pk-pdf-description"><?php echo $item->description ?></li>
+    <?php endif ?>
+  </ul>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
-			$("#pk-slot-<?php echo $id ?> .pk-context-media-pdf a").prepend('<div class="pk-media-pdf-icon-overlay">Click to Download PDF</div>').attr('title','Click to Download PDF')
+			$("#pk-slot-<?php echo $id ?> .pk-context-pdf a").prepend('<div class="pk-media-pdf-icon-overlay">Click to Download PDF</div>').attr('title','Click to Download PDF')
 		});
 	</script>
-
 <?php else: ?>
   <?php if ($defaultImage): ?>
-    <div class="pk-context-media-pdf">
-      <?php echo image_tag($defaultImage) ?>
-    </div>
+    <ul>
+      <li class="pk-context-pdf">
+        <?php echo image_tag($defaultImage) ?>
+      </li>
+    </ul>
   <?php endif ?>
 <?php endif ?>
