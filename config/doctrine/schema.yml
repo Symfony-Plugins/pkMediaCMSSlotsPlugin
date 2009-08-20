@@ -8,6 +8,13 @@ pkContextCMSImageSlot:
     keyField: type
     keyValue: 'pkContextCMSImage'
 
+pkContextCMSButtonSlot:
+  inheritance:
+    extends: pkContextCMSSlot
+    type: column_aggregation
+    keyField: type
+    keyValue: 'pkContextCMSButton'
+
 pkContextCMSSlideshowSlot:
   inheritance:
     extends: pkContextCMSSlot
