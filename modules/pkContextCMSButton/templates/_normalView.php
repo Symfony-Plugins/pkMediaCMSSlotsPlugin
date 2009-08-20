@@ -8,9 +8,12 @@
   <?php // Wrap controls in a slot to be inserted in a slightly different ?>
   <?php // context by the _area.php template ?>
 
+  <?php // Very short labels so sidebar slots don't have wrap in their controls. ?>
+  <?php // That spoils assumptions that are being made elsewhere that they will ?>
+  <?php // amount to only one row. TODO: find a less breakage-prone solution to that problem. ?>
   <?php slot("pk-slot-controls-$name-$permid") ?>
   	<li class="pk-controls-item choose-image">
-    <?php echo link_to('Choose image',
+    <?php echo link_to('Image',
       sfConfig::get('app_pkMedia_client_site', false) . "/media/select?" .
         http_build_query(
           array_merge(
@@ -31,7 +34,7 @@
   	</li>
 
     <?php include_partial('pkContextCMS/simpleEditButton',
-      array('name' => $name, 'permid' => $permid, 'label' => 'Set URL', 'title' => 'Set URL', 'controlsSlot' => false)) ?>
+      array('name' => $name, 'permid' => $permid, 'label' => 'URL', 'title' => 'Set URL', 'controlsSlot' => false)) ?>
   <?php end_slot() ?>
 <?php endif ?>
 
