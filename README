@@ -8,7 +8,8 @@
 
 == Installation ==
 
-Enable the pkContextCMSImage, pkContextCMSSlideshow and pkContextCMSVideo 
+Enable the pkContextCMSImage, pkContextCMSSlideshow, pkContextCMSButton,
+pkContextCMSPDF and pkContextCMSVideo 
 modules, add those slot types to the allowed slots in your pkContextCMS project,
 and set the API key to be used when talking to pkMediaPlugin. 
 Optionally you can also specify the site on which pkMediaPlugin
@@ -22,11 +23,14 @@ repository:
           pkContextCMSImage: Image
           pkContextCMSSlideshow: Slideshow
           pkContextCMSVideo: Video
+          pkContextCMSButton: Button
+          pkContextCMSPDF: PDF
           ... other custom slot types here
       pkMedia:
         # Required unless media site has apipublic set to true
         client_apikey: "yourapikey"
-        # Optional
+        # Optional. Don't specify unless your media plugin server
+        # is a separate site
         # client_site: http://www.mymediasite.com
 
 On the site where pkMediaPlugin is installed (which, by default, is the
@@ -56,13 +60,28 @@ dev:
   pkMedia:
     client_site: http://mediasite/frontend_dev.php/
 
+(Technically you will still want to install the media plugin on the client site,
+but the only code being used there will be the API classes.)
+
 == Usage ==
 
 Include an image slot or add one to a multiple-slot area in your
 pkContextCMS site in the usual way. Then click "Choose Image" in
 the slot to browse the media plugin. Select an image by clicking on it. 
 
-Slideshow slots are similar. Include one in the usual way.
+Button slots are exactly like image slots, with the addition of a
+user-configurable link to another page. Click the "Image" icon to
+select an image, then click the "URL" icon to set the URL that
+the image links to. This is an easy way to allow your clients to
+add graphical links to external sites.
+
+PDF slots behave much like image slots, except that they select and
+display PDF documents. The PDF is represented by a snapshot of its
+first page with a PDF icon superimposed on it. When the user clicks
+on the snapshot, the actual PDF is downloaded to the browser. Your clients
+can also link directly to PDFs via the rich text slot.
+
+Slideshow slots are similar to image slots. Include one in the usual way.
 Then click "Choose Images" in the slot to browse the media plugin. Select 
 photos by clicking on them. The selected photos appear at the top of the page 
 and can be dragged and dropped into any desired order. When you return to the 
