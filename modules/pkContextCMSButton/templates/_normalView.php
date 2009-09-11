@@ -49,7 +49,7 @@
         $dimensions['format']),
       $item->embed) ?>
     <?php if ($link): ?>
-      <?php $embed = "<a href=\"$link\">$embed</a>" ?>
+      <?php $embed = "<a class=\"pk-button-link\" href=\"$link\">$embed</a>" ?>
     <?php endif ?>
     <?php echo $embed ?>
     </li>
