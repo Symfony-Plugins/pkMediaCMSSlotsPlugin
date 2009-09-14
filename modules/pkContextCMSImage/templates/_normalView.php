@@ -30,18 +30,29 @@
     array('class' => 'pk-btn icon pk-media')) ?>
 	</li>
 <?php end_slot() ?>
+<?php endif ?>
 
+<?php // one set of code with or without a real item so I don't goof ?>
+<?php if ((!$item) && ($defaultImage)): ?>
+  <?php $item = new stdclass() ?>
+  <?php $item->title = '' ?>
+  <?php $item->description = '' ?>
+  <?php $item->embed = "<img src='$defaultImage' />" ?>
 <?php endif ?>
 <?php if ($item): ?>
   <ul>
     <li class="pk-context-image">
-    <?php $embed = str_replace(
-      array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-      array($dimensions['width'], 
-        $dimensions['height'],
-        $dimensions['resizeType'],
-        $dimensions['format']),
-      $item->embed) ?>
+    <?php if (isset($dimensions)): ?>
+      <?php $embed = str_replace(
+        array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
+        array($dimensions['width'], 
+          $dimensions['height'],
+          $dimensions['resizeType'],
+          $dimensions['format']),
+        $item->embed) ?>
+    <?php else: ?>
+      <?php $embed = $item->embed ?>
+    <?php endif ?>
     <?php if ($link): ?>
       <?php $embed = "<a href=\"$link\">$embed</a>" ?>
     <?php endif ?>
@@ -54,12 +65,4 @@
       <li class="pk-image-description"><?php echo $item->description ?></li>
     <?php endif ?>
   </ul>
-<?php else: ?>
-  <?php if ($defaultImage): ?>
-    <ul>
-      <li class="pk-context-image">
-        <?php echo image_tag($defaultImage) ?>
-      <li>
-    </ul>
-  <?php endif ?>
 <?php endif ?>
