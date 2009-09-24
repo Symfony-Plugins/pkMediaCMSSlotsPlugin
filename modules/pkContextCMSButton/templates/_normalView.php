@@ -39,8 +39,8 @@
 <?php endif ?>
 
 <?php if ($item): ?>
-  <ul>
-    <li class="pk-context-image">
+  <ul class="pk-button">
+    <li class="pk-button-image">
     <?php $embed = str_replace(
       array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
       array($dimensions['width'], 
@@ -54,18 +54,39 @@
     <?php echo $embed ?>
     </li>
     <?php if ($title): ?>
-      <li class="pk-image-title"><?php echo $item->title ?></li>
+      <li class="pk-button-title"><?php echo $item->title ?></li>
     <?php endif ?>
     <?php if ($description): ?>
-      <li class="pk-image-description"><?php echo $item->description ?></li>
+      <li class="pk-button-description"><?php echo $item->description ?></li>
     <?php endif ?>
   </ul>
 <?php else: ?>
   <?php if ($defaultImage): ?>
-    <ul>
-      <li class="pk-context-image">
+  <ul class="pk-button default">
+      <li class="pk-button-image">
         <?php echo image_tag($defaultImage) ?>
       <li>
     </ul>
   <?php endif ?>
 <?php endif ?>
+
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+
+		$('.pk-button a').hover(function(){
+			$(this).children('img').fadeTo(0,.5);
+		},function(){
+			$(this).children('img').fadeTo(0,1);			
+		});
+
+		<?php if (0): ?>
+		// I am saving this one, It's an OVERLAY that we can apply colors to, rather than a simple opacity toggle on hover
+		// $('.pk-button a').append('<span class="button-hover-overlay"></span>');
+		// $('.button-hover-overlay').fadeTo(0,.5).hide().parent().hover(function(){
+		// 	$(this).children('span').show();
+		// }, function(){
+		// 	$(this).children('span').hide();
+		// })
+		<?php endif ?>
+	});
+</script>
