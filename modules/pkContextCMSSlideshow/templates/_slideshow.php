@@ -1,7 +1,7 @@
 <?php if ($options['arrows'] && (count($items) > 1)): ?>
 <ul id="pk-slideshow-controls-<?php echo $id ?>" class="pk-slideshow-controls">
-	<li><?php echo link_to_function('Previous', '', array('class' => 'pk-slideshow-controls-previous pk-btn pk-arrow-left icon nobg', )) ?></li>
-	<li><?php echo link_to_function('Next', '', array('class' => 'pk-slideshow-controls-next pk-btn pk-arrow-right icon	nobg', )) ?></li>
+	<li class="pk-slideshow-controls-previous pk-btn pk-arrow-left icon nobg">Previous</li>
+	<li class="pk-slideshow-controls-next pk-btn pk-arrow-right icon nobg">Next</li>
 </ul>
 <?php endif ?>
 
@@ -21,6 +21,7 @@
       $dimensions['resizeType'],
       $dimensions['format']),
     $item->embed) ?>
+
   <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>">
     <ul>
       <li class="pk-slideshow-image" style="height:<?php echo $options['height'] ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
@@ -52,9 +53,9 @@
 		$('#pk-slideshow-<?php echo $id ?>').bind('showImage', function(e, num){
 			position = num;
 			slideshowItems.hide();
-			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');				
-		})
-	
+			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');
+		});
+		
 	  slideshowItems.click(function(event) {
 			event.preventDefault();
 			$(this).attr('title','Click For Next Image');
