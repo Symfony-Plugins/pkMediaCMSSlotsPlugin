@@ -36,8 +36,8 @@
 </ul>
 
 <?php if (count($items) > 1): ?>
-	<script type='text/javascript'>
-		$(document).ready(function() {
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
 
 			var position = 0;
 			var img_count = <?php echo count($items) ?>-1;
@@ -85,6 +85,11 @@
 			$(this).css('background-position','0 0');					
 		})
 
+		// Catch the anchor click and unset the parent click!
+		$('.pk-slideshow-description a').mouseup(function(){
+			$(this).parents('.pk-slideshow-item').unbind('click');
+		});
+
 	  function previous() 
 	  {
 	  	if (position >= 0)
@@ -124,13 +129,12 @@
 	  interval();
 	
 	});
-	</script>
-
+</script>
 <?php elseif (count($items) == 1): ?>
-
-	<script type="text/javascript" charset="utf-8">
-	  <?php // Make sure a single-image slideshow is not hidden entirely ?>
-	        $('#pk-slideshow-item-<?php echo $id ?>-0').show();  
-	</script>
-
+<script type="text/javascript" charset="utf-8">
+  <?php // Make sure a single-image slideshow is not hidden entirely ?>
+	$(document).ready(function() {
+     $('#pk-slideshow-item-<?php echo $id ?>-0').show();
+	});
+</script>
 <?php endif ?>
