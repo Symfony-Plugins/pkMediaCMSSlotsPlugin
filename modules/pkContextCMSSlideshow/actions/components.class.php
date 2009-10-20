@@ -40,6 +40,7 @@ class pkContextCMSSlideshowComponents extends pkContextCMSBaseComponents
     $this->options['flexHeight'] = $this->getOption('flexHeight');
     $this->options['title'] = $this->getOption('title');
     $this->options['description'] = $this->getOption('description');
+    $this->options['credit'] = $this->getOption('credit');
     $this->options['interval'] = $this->getOption('interval', false) + 0;
     $this->options['arrows'] = $this->getOption('arrows', ($this->getOption('interval') <= 0));
     $this->options['transition'] = $this->getOption('transition');

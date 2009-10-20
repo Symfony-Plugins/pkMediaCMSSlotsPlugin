@@ -23,16 +23,8 @@
     $item->embed) ?>
 
   <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>">
-    <ul>
-      <li class="pk-slideshow-image" style="height:<?php echo $options['height'] ?>;<?php echo ($n==0)? 'display:block':'' ?>"><?php echo $embed ?></li>
-      <?php if ($options['title']): ?>
-        <li class="pk-slideshow-title"><?php echo $item->title ?></li>
-      <?php endif ?>
-      <?php if ($options['description']): ?>
-        <li class="pk-slideshow-description"><?php echo $item->description ?></li>
-      <?php endif ?>
-    </ul>
-  </li>
+		<?php include_partial('pkContextCMSSlideshow/slideshowItem', array('item' => $item, 'id' => $id, 'embed' => $embed,  'options' => $options)) ?>
+	</li>
 <?php $first = false; $n++; endforeach ?>
 </ul>
 
