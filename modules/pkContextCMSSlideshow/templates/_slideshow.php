@@ -48,9 +48,8 @@
 			$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');
 		});
 		
-	  slideshowItems.click(function(event) {
+	  slideshowItems.find('.pk-slideshow-image').click(function(event) {
 			event.preventDefault();
-			$(this).attr('title','Click For Next Image');
 			next();
 	  });
 
@@ -71,11 +70,6 @@
 		},function(){
 			$(this).css('background-position','0 0');					
 		})
-
-		// Catch the anchor click and unset the parent click!
-		$('.pk-slideshow-description a').mouseup(function(){
-			$(this).parents('.pk-slideshow-item').unbind('click');
-		});
 
 	  function previous() 
 	  {
