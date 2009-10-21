@@ -87,10 +87,12 @@
 	  {
 	  	if (position >= 0)
 			{
+			  var old = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
 				position--;
 				if (position < 0 ) { position = img_count; }
-				slideshowItems.hide();
+	  		// Start fade-in first to avoid jumpscrolling up
 				$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');		
+				old.hide();
 			}
 			interval();
 	  }
@@ -99,10 +101,12 @@
 	  {
 	  	if (position <= img_count)
 	  	{
+	  	  var old = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
 	  		position++;
 	  		if (position == img_count+1 ) { position = 0; }
-	  		slideshowItems.hide();
+	  		// Start fade-in first to avoid jumpscrolling up
 	  		$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
+	  		old.hide();
 	  	}
 	  	interval();
 	  }
