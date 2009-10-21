@@ -33,7 +33,7 @@
 	$(document).ready(function() {
 
 			var position = 0;
-			var img_count = <?php echo count($items) ?>-1;
+			var img_count = <?php echo count($items)-1 ?>;
 			var slideshowItems = $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item');
 			$('.pk-context-media-show-item').hide();
 			$('#pk-slideshow-item-<?php echo $id ?>-'+position).show();
@@ -51,13 +51,7 @@
 	  slideshowItems.click(function(event) {
 			event.preventDefault();
 			$(this).attr('title','Click For Next Image');
-			if (position <= img_count)
-			{
-				position++;
-				if (position == img_count+1 ) { position = 0; }
-				slideshowItems.hide();
-				$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');	
-			}
+			next();
 	  });
 
 		$('#pk-slideshow-controls-<?php echo $id ?> .pk-slideshow-controls-previous').click(function(event){
@@ -85,28 +79,34 @@
 
 	  function previous() 
 	  {
+		  var oldItem = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
+
 	  	if (position >= 0)
 			{
-			  var old = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
 				position--;
-				if (position < 0 ) { position = img_count; }
-	  		// Start fade-in first to avoid jumpscrolling up
-				$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');		
-				old.hide();
+				if ( position < 0 ) { position = img_count; }
+
+				var newItem = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
+				newItem.parents('.pk-slideshow').css('height',newItem.height());
+				newItem.fadeIn('slow');			
+				oldItem.hide();
 			}
 			interval();
 	  }
  
 	  function next()
 	  {
+  	  var oldItem = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
+
 	  	if (position <= img_count)
 	  	{
-	  	  var old = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
 	  		position++;
-	  		if (position == img_count+1 ) { position = 0; }
-	  		// Start fade-in first to avoid jumpscrolling up
-	  		$('#pk-slideshow-item-<?php echo $id ?>-'+position).fadeIn('slow');			
-	  		old.hide();
+	  		if ( position == img_count+1 ) { position = 0; }
+
+				var newItem = $('#pk-slideshow-item-<?php echo $id ?>-'+position);
+				newItem.parents('.pk-slideshow').css('height',newItem.height());
+	  		newItem.fadeIn('slow');			
+	  		oldItem.hide();
 	  	}
 	  	interval();
 	  }
