@@ -12,7 +12,7 @@
       sfConfig::get('app_pkMedia_client_site', false) . "/media/select?" .
         http_build_query(
           array_merge(
-            $constraints,
+            $options['constraints'],
             array(
             "pkMediaId" => $itemId,
             "type" => "video",
@@ -30,14 +30,26 @@
   <?php end_slot() ?>
 <?php endif ?>
 <?php if ($item): ?>
-  <div class="pk-context-media-video">
-  <?php $embed = str_replace(
+  <ul class="pk-media-video">
+
+  <li class="pk-media-video-embed">
+	<?php $embed = str_replace(
     array("_WIDTH_", "_HEIGHT_", "_c-OR-s_", "_FORMAT_"),
-    array($width, 
-      $flexHeight ? floor(($width / $item->width) * $item->height) : $height, 
-      $resizeType,
+    array($options['width'], 
+      $options['flexHeight'] ? floor(($options['width'] / $item->width) * $item->height) : $options['height'], 
+      $options['resizeType'],
       $item->format),
     $item->embed) ?>
   <?php echo $embed ?>
-  </div>
+	</li>
+  <?php if ($options['title']): ?>
+    <li class="pk-media-video-title"><?php echo $item->title ?></li>
+  <?php endif ?>
+  <?php if ($options['description']): ?>
+    <li class="pk-media-video-description"><?php echo $item->description ?></li>
+  <?php endif ?>
+	<?php if ($options['credit']): ?>
+    <li class="pk-media-video-credit">Credit: <?php echo $item->credit ?></li>
+	<?php endif ?>
+  </ul>
 <?php endif ?>
