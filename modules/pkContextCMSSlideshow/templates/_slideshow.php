@@ -39,7 +39,7 @@
 			$('#pk-slideshow-item-<?php echo $id ?>-'+position).show();
 
 			var intervalEnabled = <?php echo ($options['interval'])? 1:0; ?>;
-
+		
 		slideshowItems.attr('title', 'Click For Next Image');
 	
 		$('#pk-slideshow-<?php echo $id ?>').bind('showImage', function(e, num){
