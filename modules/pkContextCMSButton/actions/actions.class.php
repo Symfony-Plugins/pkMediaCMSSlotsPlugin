@@ -60,7 +60,7 @@ class pkContextCMSButtonActions extends pkContextCMSBaseActions
     else
     {
       // Convert URLs back to local if they have the site's prefix
-      if (substr($url, 0, strlen($prefix) === $prefix))
+      if (substr($url, 0, strlen($prefix)) === $prefix)
       {
         $url = substr($url, strlen($prefix));
       }
