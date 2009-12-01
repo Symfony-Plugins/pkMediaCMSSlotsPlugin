@@ -1,5 +1,9 @@
 = pkMediaCMSSlotsPlugin =
 
+== Overview ==
+
+pkMediaCMSSlotsPlugin acts as a bridge between the pkContextCMSPlugin content management plugin and the pkMediaPlugin media management plugin. It provides CMS slots for media of various types. These plugins are part of a suite that makes up the [Apostrophe Content Management System](http://www.apostrophenow.com/). The philosophy of Apostrophe is that editing should be done "in context" whenever possible.
+
 == Requirements ==
 
 * pkMediaPlugin, of course
