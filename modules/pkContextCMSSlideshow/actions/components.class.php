@@ -14,7 +14,7 @@ class pkContextCMSSlideshowComponents extends pkContextCMSBaseComponents
     $this->setup();
 
 		$this->options['constraints'] = $this->getOption('constraints', array());
-		
+    
     // Behave well if it's not set yet!
     if (strlen($this->slot->value))
     {
@@ -23,6 +23,10 @@ class pkContextCMSSlideshowComponents extends pkContextCMSBaseComponents
       foreach ($this->items as $item)
       {
         $this->itemIds[] = $item->id;
+      }
+      if($this->getOption('random', false))
+      {
+        shuffle($this->items);
       }
     }
     else
