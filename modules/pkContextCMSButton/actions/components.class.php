@@ -5,18 +5,15 @@ class pkContextCMSButtonComponents extends pkContextCMSBaseComponents
   public function executeEditView()
   {
     $this->setup();
-    $this->invalid = $this->getValidationData('invalid');
-    $this->url = false;
-    if ($this->invalid)
+    // Careful, don't clobber a form object provided to us with validation errors
+    // from an earlier pass
+    if (!isset($this->form))
     {
-      $this->url = $this->getValidationData('value');
-    }
-    else
-    {
-      $data = $this->slot->getArrayValue();
-      if (isset($data['url']))
+      $this->form = new pkContextCMSButtonForm($this->id);
+      $value = $this->slot->getArrayValue();
+      if (isset($value['url']))
       {
-        $this->url = $data['url'];
+        $this->form->setDefault('url', $value['url']);      
       }
     }
   }

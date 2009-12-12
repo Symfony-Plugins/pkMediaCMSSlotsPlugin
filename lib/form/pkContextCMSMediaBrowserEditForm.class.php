@@ -1,5 +1,7 @@
 <?php
 
+// NOT BUILT YET, for now media browsing is still done via the standalone media plugin.
+
 // This form edits the constraints placed on this media browser.
 // It's part of the edit view. Not to be confused with any forms 
 // involved in actually browsing as an end user.

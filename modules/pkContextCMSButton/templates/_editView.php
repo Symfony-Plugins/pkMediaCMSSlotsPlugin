@@ -1,4 +1,4 @@
-<?php if ($invalid): ?>
+<?php if ($form['url']->hasError()): ?>
   <p class="pk-error">Invalid URL. A valid example: http://www.punkave.com/</p>
 <?php endif ?>
-<p>URL: <?php echo input_tag("url", $url, array_merge(array("id" => "$id-value", 'class' => 'pkContextCMSButtonSlot'))) ?></p>
+<p>URL: <?php echo $form['url']->render() ?></p>
