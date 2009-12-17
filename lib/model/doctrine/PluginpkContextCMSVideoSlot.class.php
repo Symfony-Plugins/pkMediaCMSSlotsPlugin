@@ -24,4 +24,8 @@ abstract class PluginpkContextCMSVideoSlot extends BasepkContextCMSVideoSlot
     }
     return $text;
   }
+  public function refreshSlot()
+  {
+    return pkContextCMSImageSlot::refreshImageSlot($this);
+  }
 }

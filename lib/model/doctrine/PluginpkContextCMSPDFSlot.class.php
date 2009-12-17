@@ -5,5 +5,8 @@
  */
 abstract class PluginpkContextCMSPDFSlot extends BasepkContextCMSPDFSlot
 {
-
+  public function refreshSlot()
+  {
+    return pkContextCMSImageSlot::refreshImageSlot($this);
+  }
 }
