@@ -26,7 +26,7 @@ abstract class PluginpkContextCMSButtonSlot extends BasepkContextCMSButtonSlot
       echo("Warning: no valid response for slot " . $slot->id . ", leaving it alone on this pass\n");
       return;
     }
-    if (!is_array($result))
+    if (!is_array($results))
     {
       throw new sfException('Result should have been array or false, received something else');
     }
