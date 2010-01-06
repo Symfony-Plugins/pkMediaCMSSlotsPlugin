@@ -32,6 +32,7 @@ class pkContextCMSButtonActions extends pkContextCMSBaseActions
       $url = $this->form->getValue('url');
       $value = $this->slot->getArrayValue();
       $value['url'] = $url;
+      $value['title'] = $this->form->getValue('title');
       $this->slot->setArrayValue($value);
       $result = $this->editSave();
       return $result;

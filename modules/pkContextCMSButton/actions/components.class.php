@@ -15,6 +15,10 @@ class pkContextCMSButtonComponents extends pkContextCMSBaseComponents
       {
         $this->form->setDefault('url', $value['url']);      
       }
+      if (isset($value['title']))
+      {
+        $this->form->setDefault('title', $value['title']);      
+      }
     }
   }
   public function executeNormalView()
@@ -35,6 +39,10 @@ class pkContextCMSButtonComponents extends pkContextCMSBaseComponents
     if (isset($data['url']))
     {
       $this->link = $data['url'];
+    }
+    if (isset($data['title']))
+    {
+      $this->img_title = $data['title'];
     }
     $this->item = false;
     $this->itemId = false;

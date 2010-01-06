@@ -53,8 +53,8 @@
     <?php endif ?>
     <?php echo $embed ?>
     </li>
-    <?php if ($title): ?>
-      <li class="pk-button-title"><?php echo $item->title ?></li>
+    <?php if (isset($img_title)): ?>
+      <li class="pk-button-title"><?php echo $img_title ?></li>
     <?php endif ?>
     <?php if ($description): ?>
       <li class="pk-button-description"><?php echo $item->description ?></li>
