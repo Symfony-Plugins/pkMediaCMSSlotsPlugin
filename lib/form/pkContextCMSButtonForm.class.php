@@ -10,8 +10,14 @@ class pkContextCMSButtonForm extends sfForm
   }
   public function configure()
   {
-    $this->setWidgets(array('url' => new sfWidgetFormInputText(array(), array('class' => 'pkContextCMSButtonSlot'))));
-    $this->setValidators(array('url' => new sfValidatorCallback(array('callback' => array($this, 'validateUrl')))));
+    $this->setWidgets(array(
+      'url' => new sfWidgetFormInputText(array(), array('class' => 'pkContextCMSButtonSlot')),
+      'title' => new sfWidgetFormInputText(array(), array('class' => 'pkContextCMSButtonSlot'))
+    ));
+    $this->setValidators(array(
+      'url' => new sfValidatorCallback(array('callback' => array($this, 'validateUrl'))),
+      'title' => new sfValidatorString()
+    ));
     $this->widgetSchema->setNameFormat('slotform-' . $this->id . '[%s]');
   }
   
