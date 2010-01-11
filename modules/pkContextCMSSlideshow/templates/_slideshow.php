@@ -22,7 +22,7 @@
       $dimensions['format']),
     $item->embed) ?>
 
-  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>">
+  <li class="pk-slideshow-item" id="pk-slideshow-item-<?php echo $id ?>-<?php echo $n ?>" <?php echo ($first)? 'style="display:list-item;"':''; ?>>
 		<?php include_partial('pkContextCMSSlideshow/slideshowItem', array('item' => $item, 'id' => $id, 'embed' => $embed, 'n' => $n,  'options' => $options)) ?>
 	</li>
 <?php $first = false; $n++; endforeach ?>
