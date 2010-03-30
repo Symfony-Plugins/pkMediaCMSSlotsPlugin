@@ -31,7 +31,8 @@
 <?php if (count($items) > 1): ?>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
-
+		// <![CDATA[
+	
 			var position = 0;
 			var img_count = <?php echo count($items)-1 ?>;
 			var slideshowItems = $('#pk-slideshow-<?php echo $id ?> .pk-slideshow-item');
@@ -120,12 +121,17 @@
 	  interval();
 	
 	});
+
+	// ]]>	
 </script>
 <?php elseif (count($items) == 1): ?>
 <script type="text/javascript" charset="utf-8">
+// <![CDATA[
+
   <?php // Make sure a single-image slideshow is not hidden entirely ?>
 	$(document).ready(function() {
      $('#pk-slideshow-item-<?php echo $id ?>-0').show();
 	});
+	// ]]>
 </script>
 <?php endif ?>
